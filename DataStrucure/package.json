@@ -1,0 +1,26 @@
+{
+  "name": "datastrucure",
+  "version": "1.0.0",
+  "description": "implementing DataStructure in javaScript ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/rickyansari/JavaScriptDSA.git"
+  },
+  "keywords": [
+    "data",
+    "structure",
+    "algo",
+    "jS",
+    "classes"
+  ],
+  "author": "mohammedashfaq.nitk@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rickyansari/JavaScriptDSA/issues"
+  },
+  "homepage": "https://github.com/rickyansari/JavaScriptDSA#readme"
+}
