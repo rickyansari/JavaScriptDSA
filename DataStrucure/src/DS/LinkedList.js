@@ -236,8 +236,33 @@ function createLinkList(array) {
     Input: A - > B - > C - > D - > E - > C [the same C as earlier]
     Output: C
 */
+function createCircleInLinkList(entryPointData, traversingNode) {
+  let circleEntryPointNode = null;
+  while (traversingNode.next) {
+    if (traversingNode.data === entryPointData) {
+      circleEntryPointNode = traversingNode;
+    }
+    traversingNode = traversingNode.next;
+  }
+  traversingNode.next = circleEntryPointNode;
+}
 
-// (function() {})();
+(function() {
+  let linkedList = createLinkList([1, 2, 3, 4, 5, 6, 7]);
+  createCircleInLinkList(3, linkedList.head);
+  function findCircleBiginning(traversingNode) {
+    let data = [];
+    while (traversingNode) {
+      if (data.includes(traversingNode)) {
+        return { success: true, entryPoint: traversingNode.data };
+      }
+      data.push(traversingNode);
+      traversingNode = traversingNode.next;
+    }
+    return {};
+  }
+  console.log(findCircleBiginning(linkedList.head));
+})();
 
 /*
 2.7 Implement a function to check if a linked list is a palindrome.
@@ -253,25 +278,42 @@ function reverseLinkedList(linkedList) {
     q.next = r;
   }
   linkedList.head = q;
-  return linkedList;
+}
+
+function reverseLinkedListWithRecursion(
+  previousNode = null,
+  currentNode,
+  linkedList
+) {
+  if (currentNode) {
+    reverseLinkedListWithRecursion(currentNode, currentNode.next, linkedList);
+    currentNode.next = previousNode;
+  } else {
+    linkedList.head = previousNode;
+  }
 }
 
 (function() {
-  let linkedList = createLinkList([1, 2, 3, 4, 5, 6]);
-  let reversedLinkedList = reverseLinkedList(
-    createLinkList([1, 2, 3, 4, 5, 6])
+  let linkedList = createLinkList([1, 2, 3, 2, 1]);
+  let reversedLinkedList = createLinkList([1, 2, 3, 4, 5]);
+  // reverseLinkedList(reversedLinkedList);
+  reverseLinkedListWithRecursion(
+    null,
+    reversedLinkedList.head,
+    reversedLinkedList
   );
-  ll1 = linkedList.head;
-  ll2 = linkedList.head;
-  while (ll1) {
-    if (ll1.data === ll2.data) {
-      ll1 = ll1.next;
-      ll2 = ll2.next;
-    } else {
-      return false;
+
+  function checkPalindrome(ll1, ll2) {
+    while (ll1) {
+      if (ll1.data === ll2.data) {
+        ll1 = ll1.next;
+        ll2 = ll2.next;
+      } else {
+        return false;
+      }
     }
+
+    return true;
   }
-  console.log(JSON.stringify(linkedList));
-  console.log(JSON.stringify(reversedLinkedList));
-  return true;
+  console.log(checkPalindrome(linkedList.head, reversedLinkedList.head));
 })();
