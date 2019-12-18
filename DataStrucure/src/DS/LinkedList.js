@@ -31,6 +31,10 @@ class LinkedList {
   isFirstNode(node) {
     return this.head === node;
   }
+
+  print() {
+    console.log(JSON.stringify(this));
+  }
 }
 
 function createLinkList(array) {
@@ -43,6 +47,7 @@ function createLinkList(array) {
 
 // Write code to remove duplicate from an unsorted linkedlist
 
+// My solution
 (function() {
   let linkedList = createLinkList([1, 2, 3, 2, 3]);
   function removeDuplicateNode(head) {
@@ -61,9 +66,30 @@ function createLinkList(array) {
         currentNode = currentNode.next;
       }
     }
-    console.log(JSON.stringify(linkedList));
   }
   removeDuplicateNode(linkedList.head);
+  linkedList.print();
+})();
+
+// Final Solution
+
+(function() {
+  let linkedList = createLinkList([1, 2, 3, 2, 3, 8, 9, 10]);
+  function removeDuplicateNode(currentNode) {
+    let previousNode = null;
+    let traversedNodeData = {};
+    while (currentNode) {
+      if (traversedNodeData[currentNode.data]) {
+        previousNode.next = currentNode.next;
+      } else {
+        traversedNodeData[currentNode.data] = true;
+        previousNode = currentNode;
+      }
+      currentNode = currentNode.next;
+    }
+  }
+  removeDuplicateNode(linkedList.head);
+  linkedList.print();
 })();
 
 /* FOLLOW UP =>
@@ -91,9 +117,9 @@ function createLinkList(array) {
       }
       currentNode = currentNode.next;
     }
-    console.log(JSON.stringify(linkedList));
   }
   removeDuplicateNodeWithoutTemporaryBuffer(linkedList.head);
+  linkedList.print();
 })();
 
 /* 
