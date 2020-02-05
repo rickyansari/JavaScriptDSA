@@ -1,17 +1,19 @@
 class Stack {
   constructor() {
+    this.maxSize = length;
     this.stack = [];
   }
 
   push(item) {
+    if(this.stack.length === this.length){
+      throw new Error("Stack is Overflow")
+    }
     this.stack[this.stack.length] = item;
-    //this.stack.push(item);
   }
 
   pop() {
-    if (this.stack.length) {
-      // this.stack.pop();
-      this.stack.splice(this.stack.length - 1, 1);
+    if (!this.stack.length) {
+      return this.stack.splice(this.stack.length - 1, 1);
     } else {
       throw new Error("Stack is underFlow");
     }
