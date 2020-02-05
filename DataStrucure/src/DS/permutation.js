@@ -20,7 +20,7 @@ function getAllPermutations(string) {
 
 // Easy to understand
 function permut(string) {
-  if (string.length < 2) return string;
+if (string.length < 2) return [string];
   var permutations = [];
   for (var i = 0; i < string.length; i++) {
     var char = string[i];
@@ -35,3 +35,16 @@ function permut(string) {
 }
 var myString = "xyz";
 console.log(permut(myString))
+
+let A =[1,2,3,4]
+function Binary(n){
+  if(n<1) {
+    console.log(A)
+  }else {
+    A[n-1]=0;
+    Binary(n-1);
+    A[n-1]=1;
+    Binary(n-1)
+  }
+}
+Binary(3)
