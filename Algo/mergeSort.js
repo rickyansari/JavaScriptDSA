@@ -1,15 +1,23 @@
-function merge(array1) {}
-
-function divide(array) {
-  if (array.length % 2 === 0) {
-  } else {
-  }
-}
-
 function mergeSort(input) {
-  if (input.length < 2) return input;
-  const { firstHalf, lastHalf } = divideArray(input);
-  const sortedLeftArray = mergeSort(left);
-  const sortedRightArray = mergeSort(right);
-  combine(sortedLeftArray, sortedRightArray);
+  const {length:arraySize} = input;
+  if (arraySize < 2) return input;
+  const mid = Math.floor(arraySize/2);
+  const sortedLeftArray = mergeSort(input.slice(0,mid));
+  const sortedRightArray = mergeSort(input.slice(mid, arraySize));
+  return merge(sortedLeftArray, sortedRightArray);
 }
+
+function merge (left, right){
+  let result = []
+  while(left.length && right.length){
+    if(left[0]< right[0]){
+      result.push(left.shift())
+    }else{
+      result.push(right.shift())
+    }
+  }
+  /* Either left/right array will be empty or both */
+  return [...result, ...left, ...right];
+}
+
+console.log(mergeSort([5,3,8,10,4,1]))
